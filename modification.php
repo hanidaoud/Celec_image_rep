@@ -20,10 +20,10 @@
         if(is_dir("$path/$matricule")){
             foreach (new DirectoryIterator("$path/$matricule") as $fileInfo) {
                 if($fileInfo->isDot()) continue;
-                if (strpos($fileInfo->getFilename(), "certificate")) {
+                if (strpos($fileInfo->getFilename(), "certificate.")) {
                     $certificate = $fileInfo->getFilename();
                     
-                }elseif(strpos($fileInfo->getFilename(), "picture")){
+                }elseif(strpos($fileInfo->getFilename(), "picture.")){
                     $picture = $fileInfo->getFilename();
                     
                 }
@@ -58,12 +58,12 @@
             /*Check extention*/
             $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
             if ($ext == 'jpg' || $ext == 'png') {
-                
+                /* check size */
                 if ($_FILES['picture']['size'] < $max_size) {
                     $path="$uuid-picture.$ext";
                     $pathto="./Global/$matricule/".$path;
                     if (move_uploaded_file( $_FILES['picture']['tmp_name'],$pathto)) {
-                        if (sizeof(glob("$path/$matricule/*picture*"))>1) {
+                        if (sizeof(glob("$path/$matricule/*picture.*"))>1) {
                             unlink($picture_path);
                         }  
                     } else {
@@ -97,13 +97,13 @@
             /*Check extention*/
             $ext = pathinfo($_FILES['certificate']['name'], PATHINFO_EXTENSION);
             if ($ext == 'jpg' || $ext == 'png') {
-                
+                /* check size */
                 if ($_FILES['certificate']['size'] < $max_size) {
                     
                     $path="$uuid-certificate.$ext";
                     $pathto="./Global/$matricule/".$path;
                     if (move_uploaded_file( $_FILES['certificate']['tmp_name'],$pathto)) {
-                        if (sizeof(glob("$path/$matricule/*certificate*"))>1) {
+                        if (sizeof(glob("$path/$matricule/*certificate.*"))>1) {
                             unlink($certificate_path);
                         }                        
                         $certificate_fired = true;

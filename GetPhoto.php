@@ -13,10 +13,10 @@
         if(is_dir("$path/$matricule")){
             foreach (new DirectoryIterator("$path/$matricule") as $fileInfo) {
                 if($fileInfo->isDot()) continue;
-                if (strpos($fileInfo->getFilename(), "certificate")) {
+                if (strpos($fileInfo->getFilename(), "certificate.")) {
                     $certificate = $fileInfo->getFilename();
                     
-                }elseif(strpos($fileInfo->getFilename(), "picture")){
+                }elseif(strpos($fileInfo->getFilename(), "picture.")){
                     $picture = $fileInfo->getFilename();
                     
                 }
