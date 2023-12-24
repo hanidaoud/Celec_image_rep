@@ -23,12 +23,14 @@
             }
         }
         if (isset($picture)) {
+            // You have the picture path
             $picture_path = "$path/$matricule/".$picture;
         }else{
             $picture_path = "#";
             echo"<script>alert('picture not found')</script>";
         }
         if (isset($certificate)) {
+            // You have the certificate path
             $certificate_path = "$path/$matricule/".$certificate;
         }else{
             $certificate_path = "#";
