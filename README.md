@@ -6,4 +6,4 @@ modification.php : you can modify your photos with your matricule
 
 
 
-For getting the uuid and different paths the files are GetPhoto.php, connect.php, GetUUID. The final result is the Json $photo_data in the GetPhoto.php file  
+For getting the uuid and different paths the files are GetPhoto.php, GetUUID. The final result is the Json $photo_data in the GetPhoto.php file  
