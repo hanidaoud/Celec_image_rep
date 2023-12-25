@@ -17,8 +17,6 @@
         <input type="file" name="certificate" id="certificate">
         <input type="submit" name="button" value="go">
     </form>
-
-
     <?php
 
         /* getting the files */ 
