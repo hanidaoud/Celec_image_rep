@@ -1,4 +1,6 @@
-<?php require_once"connect.php"?>
+<?php
+    require "GetUUID.php";
+?>
 <form action="GetPhoto.php" method="post">
     <label for="matricule">matricule : </label>
     <input type="text" name="matricule" id="matricule">
@@ -23,22 +25,28 @@
             }
         }
         if (isset($picture)) {
-            // You have the picture path
+            $uuid = getUUID($picture);
             $picture_path = "$path/$matricule/".$picture;
         }else{
             $picture_path = "#";
             echo"<script>alert('picture not found')</script>";
         }
         if (isset($certificate)) {
-            // You have the certificate path
             $certificate_path = "$path/$matricule/".$certificate;
+            $uuid = getUUID($certificate);
         }else{
             $certificate_path = "#";
             echo"<script>alert('certificate not found')</script>";
+        }
+        if(!isset($uuid)){
+            echo"<script>alert('UUID not found')</script>";
         }
     }
     
 
 ?>
+<?php if (isset($uuid)) {
+    echo "<h1>Your uuid is $uuid</h1>";
+}?>
 <img src="<?php echo"$picture_path"?>" alt="">
 <img src="<?php echo"$certificate_path"?>" alt="">

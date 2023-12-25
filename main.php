@@ -59,7 +59,13 @@
 
             /*            INSERTION                 */
             /*             Define uuid              */
-            $uuid = "myuuid";
+            $uuid = rand(10000000, 99999999);
+
+
+            for ($i=0; $i < 3; $i++) { 
+                $uuid = $uuid."-".rand(1000,9999);
+            }
+            $uuid = $uuid."-".rand(100000000000, 999999999999);
             /* max_size en BIT*/
             $max_size = 500000;
             
