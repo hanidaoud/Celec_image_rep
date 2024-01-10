@@ -1,10 +1,14 @@
-<?php require_once"connect.php"?>
+<?php
+    require "GetUUID.php";
+?>
+<!--   That is just a protocole to try differents matricule     -->
 <form action="GetPhoto.php" method="post">
     <label for="matricule">matricule : </label>
     <input type="text" name="matricule" id="matricule">
     <input type="submit" value="go">
 </form>
 <?php
+    // DO a post for the matricule to be initialized
     if (!isset($_POST['matricule'])) {
         $matricule = null;
     } else {
@@ -23,22 +27,36 @@
             }
         }
         if (isset($picture)) {
-            // You have the picture path
+            $uuid = getUUID($picture);
             $picture_path = "$path/$matricule/".$picture;
         }else{
             $picture_path = "#";
             echo"<script>alert('picture not found')</script>";
         }
         if (isset($certificate)) {
-            // You have the certificate path
             $certificate_path = "$path/$matricule/".$certificate;
+            $uuid = getUUID($certificate);
         }else{
             $certificate_path = "#";
             echo"<script>alert('certificate not found')</script>";
+        }
+        if(!isset($uuid)){
+            echo"<script>alert('UUID not found')</script>";
         }
     }
     
 
 ?>
-<img src="<?php echo"$picture_path"?>" alt="">
-<img src="<?php echo"$certificate_path"?>" alt="">
+
+<?php 
+    if (isset($uuid)) {
+        echo "<h1>Your uuid is $uuid</h1>";
+        $photo_data['photo_uuid'] = $uuid;
+        $photo_data['picture_path'] = $picture_path;
+        $photo_data['certificate_path'] =$certificate_path;
+
+
+        /** Your json data */
+        $photo_data = json_encode($photo_data, JSON_PRETTY_PRINT);
+    }
+?>
